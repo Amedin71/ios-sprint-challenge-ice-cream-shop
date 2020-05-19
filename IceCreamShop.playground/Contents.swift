@@ -18,7 +18,7 @@ let large = Size.large
 
 struct Cone {
     let coneFlavor: Flavors
-    var topping: String
+    var topping: String?
     var size: Size
     
    func eat() {
@@ -28,20 +28,20 @@ struct Cone {
 
 class IceCreamShop {
     
-    var flavorNames: Flavors
+    var flavorNames: [Flavors]
     var toppings: String
     var size: [Size]
     var totalSales: Double
    
-    init(flavorNames: Flavors, toppings: String, size: [Size], totalSales: Double) {
+    init(flavorNames: [Flavors], toppings: String, size: [Size], totalSales: Double) {
         self.flavorNames = flavorNames
         self.toppings = toppings
         self.size = size
         self.totalSales = 0.0
     }
     func listTopFlavors() {
-        for flavor in flavor.rate {
-            if flavors.rate > 4.0 {
+        for flavor in flavorNames {
+            if flavor.rate > 4.0 {
                 print("Our top flavors are \(flavor.name).")
             }
         }
@@ -51,8 +51,8 @@ class IceCreamShop {
         
         let newCone = Cone(coneFlavor: flavor, topping: toppings, size: size)
         totalSales += size.rawValue
-        if let orderCone = newCone.topping {
-            print("Your \(newCone.coneFlavor.name) with ice cream is \(size.rawValue)")
+        if let unwrappedTopping = newCone.topping {
+            print("Your \(newCone.coneFlavor.name) with \(unwrappedTopping) ice cream is \(size.rawValue)")
         }else{
             print("Your \(newCone.coneFlavor.name) ice cream is \(size.rawValue)")
         }
@@ -75,7 +75,7 @@ myIceCreamShop.listTopFlavors()
 print(myIceCreamShop.totalSales)
 
 let orderedCone = myIceCreamShop.orderCone(flavor: strawberry, topping: topsArray[1], size: .medium)
-print(orderedCone)
+
 orderedCone?.eat
 
 print(myIceCreamShop.totalSales)
